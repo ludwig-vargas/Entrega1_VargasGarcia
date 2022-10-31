@@ -35,7 +35,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="#!">Inventario</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'product:product-list' %}">Productos</a></li>
                     <li class="nav-item"><a class="nav-link" href="#!">Clientes</a></li>
                     <li class="nav-item"><a class="nav-link" href="#!">Empleados</a></li>
                 </ul>
@@ -47,8 +47,8 @@
     <!-- Masthead-->
     <header class="masthead">
         <div class="container">
-            <div class="masthead-subheading">Welcome To Our Inventory!</div>
-            <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
+            <div class="masthead-subheading">Bienvenido a...!</div>
+            <div class="masthead-heading text-uppercase">Mi Inventario CoderHouse</div>
         </div>
     </header>
     {% endblock %}
@@ -74,24 +74,36 @@
     <section class='page-section'>
         <div class="container">
             <div class="text-center">
-
-                <!-- Post preview-->
                 {% block my_inventory_content %}
                 <!-- Search-->
-                <h2 class='section-heading text-uppercase'>Buscar Producto</h2>
-                <form>
+                <form action="{% url 'home:search' %}" method="GET">
                     <div class="row">
                         <div class="col-lg-8 ">
-                            <input class="form-control" type="text" id="product_code_or_name" placeholder="Buscar...">
+                            <input class="form-control" type="text" id="product_code_or_name" name="search_param" placeholder="Buscar..."
+                            {% if search_param %} value = "{{search_param}}" {% endif %}>
                         </div>
                         <div class="col-lg-4 ">
-                            <button class="btn btn-primary" type="submit" value="Buscar">Buscar</button>
+                            <input type="submit" value="Buscar" class="btn btn-primary">
+                            <a href={% url 'home:index' %} ></a>
                         </div>
                     </div>
                 </form>
-                {% endblock %}
                 <!-- Divider-->
+                <hr class="my-4" />
 
+                <!-- Si hay resultados en el buscador los presenta -->
+                {% if products %}
+                {% for product in products %}
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        <h2 class="post-title">Producto: {{ product.name_product }}</h2>
+                        <h3 class="post-subtitle">Código: {{ product.code_product }}</h3>
+                    </div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                {% endfor %}
+                {% endif %}
+                {% endblock %}
             </div>
         </div>
     </section>

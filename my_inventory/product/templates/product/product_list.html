@@ -1,0 +1,78 @@
+{% extends 'home/index.html' %}
+{% load static %}
+{% block my_inventory_title %}Product list{% endblock %}
+
+{% block my_inventory_header %}
+    <!-- Masthead-->
+    <header class="masthead" style="background-image: url('/static/home/assets/img/product.jpg')">
+        <div class="container">
+            <div class="masthead-subheading">Mi Inventario CoderHouse</div>
+            <div class="masthead-heading text-uppercase">Lista de Productos</div>
+            <a href = "{% url 'product:product-add' %}" class="btn btn-outline-success">Crear nuevo producto</a>
+        </div>
+    </header>
+{% endblock %}
+
+{% block my_inventory_content %}
+{% for product in product_list %}
+    <!-- Post preview-->
+    <div class="post-preview">
+            <h2 class="post-title">Este es el Producto: {{ product.name_product }}</h2>
+            <h3 class="post-subtitle">Que tiene el código: {{ product.code_product }}</h3>
+            <h3 class="post-subtitle">Existencia: {{product.existence}}</h3>
+    </div>
+    <!-- Divider-->
+    <hr class="my-4" />
+{% endfor %}
+
+<!--Pagination-->
+<div class="container p-4">
+    <div class="pagination justify-content-center">
+        <span class="step-links">
+            {% if product_list.has_previous %}
+                <a href="?page=1">&laquo; first</a> |
+                <a href="?page={{ product_list.previous_page_number }}">previous</a> |
+            {% endif %}
+
+            {% if product_list.paginator.num_pages > 1 %}
+            <span class="current">
+                Page {{ product_list.number }} of {{ product_list.paginator.num_pages }} |
+            </span>
+            {% endif %}
+
+            {% if product_list.has_next %}
+                <a href="?page={{ product_list.next_page_number }}">next</a> |
+                <a href="?page={{ product_list.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+<!--end of Pagination-->
+
+<!--Pagination Class Based Views-->
+{% if is_paginated %}
+<div class="container p-4">
+    <div class="pagination justify-content-center">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a> |
+                <a href="?page={{ product_list.previous_page_number }}">previous</a> |
+            {% endif %}
+
+            {% if page_obj.paginator.num_pages > 1 %}
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} |
+            </span>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a> |
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endif %}
+<!--end of Pagination-->
+
+{% endblock %}

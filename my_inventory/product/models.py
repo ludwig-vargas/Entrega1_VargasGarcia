@@ -9,4 +9,4 @@ class Product(models.Model):
     brand = models.CharField(max_length = 40)
     
     def __str__(self):
-        return f'Code: {self.code_product} | Name product: {self.name_product} | Brand: {self.brand} | Existence: {self.existence}'
+        return f'Code: {self.code_product} | Name product: {self.name_product} | Description: {self.description_product} | Existence: {self.existence} | Brand: {self.brand}'

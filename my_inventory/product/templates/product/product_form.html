@@ -1,0 +1,25 @@
+{% extends 'home/index.html' %}
+{% load static %}
+{% block my_inventory_title %}Product Create{% endblock %}
+
+{% block my_inventory_header %}
+    <!-- Masthead-->
+    <header class="masthead" style="background-image: url('/static/home/assets/img/product.jpg')">
+        <div class="container">
+            <div class="masthead-subheading">Mi Inventario CoderHouse</div>
+            <div class="masthead-heading text-uppercase">Crear Producto</div>
+        </div>
+    </header>
+{% endblock %}
+
+{% block my_inventory_content %}
+<div>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="btn btn-primary" value="Guardar curso" />
+    </form>
+</div>
+<!-- Divider-->
+<hr class="my-4" />
+{% endblock  %}

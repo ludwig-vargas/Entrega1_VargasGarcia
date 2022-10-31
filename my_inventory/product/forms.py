@@ -1,3 +1,4 @@
+from dataclasses import fields
 from django import forms
 from product.models import Product
 
@@ -10,6 +11,9 @@ class ProductForm(forms.ModelForm):
                 'class': 'product-code',
                 'placeholder': 'codigo del producto',
                 'required': 'True',
+                'type':'number',
+                'minlength':'3',
+                'maxlength':'3',
             }
         ),
     )
@@ -43,6 +47,7 @@ class ProductForm(forms.ModelForm):
                 'class': 'product-existence',
                 'placeholder': 'Existencia del producto',
                 'required': 'True',
+                'type':'number',
             }
         ),
     )
@@ -57,3 +62,7 @@ class ProductForm(forms.ModelForm):
             }
         ),
     )
+    
+    class Meta:
+        model = Product
+        fields = ["code_product", "name_product", "description_product", "existence", "brand"]
