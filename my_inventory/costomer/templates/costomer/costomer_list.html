@@ -1,0 +1,79 @@
+{% extends 'home/index.html' %}
+{% load static %}
+{% block my_inventory_title %}Costomer list{% endblock %}
+
+{% block my_inventory_header %}
+    <!-- Masthead-->
+    <header class="masthead" style="background-image: url('/static/home/assets/img/client.jpg')">
+        <div class="container">
+            <div class="masthead-subheading">Mi Inventario CoderHouse</div>
+            <div class="masthead-heading text-uppercase">Lista de Clientes</div>
+            <a href = "{% url 'costomer:costomer-add' %}" class="btn btn-outline-success">Crear nuevo Cliente</a>
+        </div>
+    </header>
+{% endblock %}
+
+{% block my_inventory_content %}
+{% for costomer in costomer_list %}
+    <!-- Post preview-->
+    <div class="post-preview">
+            <h2 class="post-title">Cliente: {{ costomer.name_cost }} {{costomer.last_name_cost}}</h2>
+            <h3 class="post-subtitle">Que tiene el código: {{ costomer.code_cost }}</h3>
+            <h3 class="post-subtitle">Numero de telefono: {{costomer.phone_number_cost }}</h3>
+            <h3 class="post-subtitle">Email: {{costomer.email_cost }}</h3>
+    </div>
+    <!-- Divider-->
+    <hr class="my-4" />
+{% endfor %}
+
+<!--Pagination-->
+<div class="container p-4">
+    <div class="pagination justify-content-center">
+        <span class="step-links">
+            {% if costomer_list.has_previous %}
+                <a href="?page=1">&laquo; first</a> |
+                <a href="?page={{ costomer_list.previous_page_number }}">previous</a> |
+            {% endif %}
+
+            {% if costomer_list.paginator.num_pages > 1 %}
+            <span class="current">
+                Page {{ costomer_list.number }} of {{ costomer_list.paginator.num_pages }} |
+            </span>
+            {% endif %}
+
+            {% if costomer_list.has_next %}
+                <a href="?page={{ costomer_list.next_page_number }}">next</a> |
+                <a href="?page={{ costomer_list.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+<!--end of Pagination-->
+
+<!--Pagination Class Based Views-->
+{% if is_paginated %}
+<div class="container p-4">
+    <div class="pagination justify-content-center">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a> |
+                <a href="?page={{ costomer_list.previous_page_number }}">previous</a> |
+            {% endif %}
+
+            {% if page_obj.paginator.num_pages > 1 %}
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} |
+            </span>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a> |
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endif %}
+<!--end of Pagination-->
+
+{% endblock %}

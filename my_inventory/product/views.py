@@ -31,7 +31,7 @@ class ProductCreateView(CreateView):
         if actual_objects:
             messages.error(
                 self.request,
-                f"El producto {data['name_product']} - {data['code_product']} ya est'a creado",
+                f"El producto {data['name_product']} - {data['code_product']} ya esta creado",
             )
             form.add_error('name', ValidationError('Acción no válida'))
             return super().form_invalid(form)

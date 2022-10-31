@@ -36,8 +36,8 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                     <li class="nav-item"><a class="nav-link" href="{% url 'product:product-list' %}">Productos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">Clientes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">Empleados</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'costomer:costomer-list' %}">Clientes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'employee:employee-list' %}">Empleados</a></li>
                 </ul>
             </div>
         </div>
@@ -73,7 +73,7 @@
     <!-- Main Content-->
     <section class='page-section'>
         <div class="container">
-            <div class="text-center">
+            
                 {% block my_inventory_content %}
                 <!-- Search-->
                 <form action="{% url 'home:search' %}" method="GET">
@@ -103,8 +103,21 @@
                     <hr class="my-4" />
                 {% endfor %}
                 {% endif %}
+
+                <!-- Si hay resultados en el buscador los presenta -->
+                {% if employees %}
+                {% for employee in employees %}
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        <h2 class="post-title">Empleado: {{ employee.name_emp }} {{employee.last_name_emp}}</h2>
+                        <h3 class="post-subtitle">Código: {{ employee.code_emp }}</h3>
+                    </div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                {% endfor %}
+                {% endif %}
                 {% endblock %}
-            </div>
+            
         </div>
     </section>
 

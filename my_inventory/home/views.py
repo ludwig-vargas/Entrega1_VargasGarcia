@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.db.models import Q
 from product.models import Product
+from employee.models import Employee
 
 # Muestra el Index de home
 def index(request):
@@ -22,6 +23,15 @@ def search(request):
             {
                 "products": products,
                 "search_param": search_param,
+            }
+        )
+        query = Q(name_emp=search_param)
+        query.add(Q(code_emp=search_param), Q.OR)
+        employees = Employee.objects.filter(query)
+        context_dict.update(
+            {
+                "employees": employees,
+                "search_param":search_param,
             }
         )
     return render(
