@@ -116,6 +116,19 @@
                     <hr class="my-4" />
                 {% endfor %}
                 {% endif %}
+
+                <!-- Si hay resultados en el buscador los presenta -->
+                {% if costomers %}
+                {% for costomer in costomers %}
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        <h2 class="post-title">Cliente: {{ costomer.name_cost }} {{costomer.last_name_cost}}</h2>
+                        <h3 class="post-subtitle">Código: {{ costomer.code_cost }}</h3>
+                    </div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                {% endfor %}
+                {% endif %}
                 {% endblock %}
             
         </div>

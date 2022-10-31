@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.db.models import Q
 from product.models import Product
 from employee.models import Employee
+from costomer.models import Costomer
 
 # Muestra el Index de home
 def index(request):
@@ -31,6 +32,15 @@ def search(request):
         context_dict.update(
             {
                 "employees": employees,
+                "search_param":search_param,
+            }
+        )
+        query = Q(name_cost=search_param)
+        query.add(Q(code_cost=search_param), Q.OR)
+        costomers = Costomer.objects.filter(query)
+        context_dict.update(
+            {
+                "costomers": costomers,
                 "search_param":search_param,
             }
         )

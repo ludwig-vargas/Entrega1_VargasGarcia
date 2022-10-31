@@ -7,7 +7,7 @@ class CostomerForm(forms.ModelForm):
         required=False,
         widget=forms.TextInput(
           attrs={
-                'class': 'costomer-code',
+                'class': 'cost-code',
                 'placeholder': 'Codigo del cliente',
                 'required': 'True',
                 'type':'text',
@@ -21,7 +21,7 @@ class CostomerForm(forms.ModelForm):
         required=False,
         widget=forms.TextInput(
             attrs={
-                'class': 'costomer-name',
+                'class': 'cost-name',
                 'placeholder': 'Nombre del empleado',
                 'required': 'True',
             }
@@ -32,36 +32,25 @@ class CostomerForm(forms.ModelForm):
         required=False,
         widget=forms.TextInput(
             attrs={
-                'class': 'costomer-last-name',
+                'class': 'cost-last-name',
                 'placeholder': 'Apellido del cliente',
                 'required': 'True',
             }
         ),
     )
-    phone_number_cost = forms.ImageField(
+    phone_number_cost = forms.IntegerField(
         label='Numero de telefono',
         required=False,
         widget=forms.TextInput(
             attrs={
-                'class': 'costomer-phone-number',
+                'class': 'cost-phone-number',
                 'placeholder': 'Numero de telefono',
                 'required': 'True',
                 'type':'number',
             }
         ),
     )
-    email_cost = forms.EmailField(
-        label='Correo electronico',
-        required=False,
-        widget=forms.TextInput(
-            attrs={
-                'class': 'costomer-email',
-                'placeholder': 'Correo electronico',
-                'required': 'True',
-            }
-        ),
-    )
     
     class Meta:
         model = Costomer
-        fields = ["code_cost", "name_cost", "last_name_cost", "phone_number_cost", "email_cost"]
+        fields = ["code_cost", "name_cost", "last_name_cost", "phone_number_cost"]

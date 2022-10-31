@@ -26,7 +26,6 @@ class CostomerCreateView(CreateView):
             name_cost=data['name_cost'],
             last_name_cost=data['last_name_cost'],
             phone_number_cost=data['phone_number_cost'],
-            email_cost=data['email_cost']
         ).count()
         if actual_objects:
             messages.error(
